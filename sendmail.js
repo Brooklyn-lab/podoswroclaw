@@ -1,6 +1,31 @@
-// в майбутньому додати сервер,а також додати серверну валідацію
-
 const contactForm = document.querySelector("#contact-form")
+const currentUrl = window.location.pathname
+
+// Завантажуємо переклади
+const translations = {
+  pl: {
+    name: "Imię i nazwisko musi zawierać od 3 do 20 liter (bez znaków specjalnych).",
+    email: "Wprowadź poprawny adres e-mail.",
+    message: "Wiadomość nie może zawierać więcej niż 100 znaków.",
+    success: "Wiadomość została wysłana pomyślnie!",
+    error: "Wystąpił błąd podczas wysyłania wiadomości.",
+    consoleError:
+      "Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.",
+  },
+  ua: {
+    name: "Ім'я та прізвище має містити від 3 до 20 букв (без спеціальних символів).",
+    email: "Введіть дійсну електронну адресу.",
+    message: "Повідомлення не може містити більше 100 символів.",
+    success: "Повідомлення успішно відправлено!",
+    error: "Під час надсилання повідомлення сталася помилка.",
+    consoleError:
+      "Під час надсилання повідомлення сталася помилка. Спробуйте пізніше.",
+  },
+}
+
+// Вибираємо потрібну мову
+const lang = currentUrl.startsWith("/ua") ? "ua" : "pl"
+const t = translations[lang]
 
 if (contactForm) {
   contactForm.addEventListener("submit", function (event) {
@@ -9,7 +34,6 @@ if (contactForm) {
     // Збираємо дані з форми
     const form = event.target
     const name = form.name.value.trim()
-    // const phoneRaw = form.tel.value.trim();
     const email = form.email.value.trim()
     const message = form.message.value.trim()
 
@@ -17,20 +41,18 @@ if (contactForm) {
     let errors = []
 
     // Валідація імені
-    if (!/^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ\s]{3,20}$/.test(name)) {
-      errors.push(
-        "Imię i nazwisko musi zawierać od 3 do 20 liter (bez znaków specjalnych)."
-      )
+    if (!/^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻа-яА-ЯёЁїЇєЄґҐ\s]{3,20}$/.test(name)) {
+      errors.push(t.name)
     }
 
     // Валідація електронної пошти
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errors.push("Wprowadź poprawny adres e-mail.")
+      errors.push(t.email)
     }
 
     // Валідація повідомлення
     if (message.length > 100) {
-      errors.push("Wiadomość nie może zawierać więcej niż 100 znaków.")
+      errors.push(t.message)
     }
 
     // Якщо є помилки, показуємо повідомлення і зупиняємо відправку
@@ -49,17 +71,15 @@ if (contactForm) {
     })
       .then((response) => {
         if (response.ok) {
-          alert("Wiadomość została wysłana pomyślnie!")
+          alert(t.success)
           form.reset()
         } else {
-          alert("Wystąpił błąd podczas wysyłania wiadomości.")
+          alert(t.error)
         }
       })
       .catch((error) => {
-        console.error("Błąd:", error)
-        alert(
-          "Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później."
-        )
+        console.error(t.consoleError, error)
+        alert(t.consoleError)
       })
   })
 }
