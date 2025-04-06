@@ -1,0 +1,34 @@
+@import "@styles/variables.scss";
+
+.header {
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  @media (max-width: ($md4 + px)) {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.header__rightSide {
+  display: flex;
+}
+
+.header__container {
+  max-width: 1410px + 30px;
+  padding: 0 15px;
+  margin: 0 auto;
+  gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  @media (max-width: ($md2 + px)) {
+    max-width: 728px;
+  }
+
+  @media (max-width: ($md4 + px)) {
+    padding: 0 10px;
+  }
+}

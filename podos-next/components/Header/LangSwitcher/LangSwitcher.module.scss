@@ -1,0 +1,44 @@
+@import "@styles/variables.scss";
+
+.langSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 16px;
+}
+
+.langSwitcher__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+
+  @media (max-width: ($md4 + px)) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.langSwitcher__link {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  color: $base1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5.5px 8.5px;
+  border-radius: 4px;
+
+  @media (max-width: ($md4 + px)) {
+    font-size: 12px;
+    line-height: 18px;
+    padding: 3px 5.5px;
+  }
+}
+
+.active {
+  background-color: $base-accent;
+  color: $base;
+}

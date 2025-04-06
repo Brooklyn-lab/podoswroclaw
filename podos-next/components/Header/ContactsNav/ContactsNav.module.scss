@@ -1,0 +1,47 @@
+@import "@styles/variables.scss";
+
+.contacts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contacts__link {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 16px;
+  border-radius: 4px;
+  background-color: $base1;
+
+  @media (max-width: ($md3 + px)) {
+    height: 32px;
+    width: 32px;
+    padding: 0;
+  }
+
+  @media (max-width: ($md4 + px)) {
+    height: 28px;
+    width: 28px;
+  }
+}
+
+.contacts__text {
+  margin-left: 8px;
+
+  @media (max-width: ($md3 + px)) {
+    display: none;
+  }
+}
+
+.contacts__icon {
+  @media (max-width: ($md4 + px)) {
+    width: 12px;
+    height: 12px;
+  }
+}
